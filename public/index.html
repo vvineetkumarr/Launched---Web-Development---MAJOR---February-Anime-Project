@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime & TV Series Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-tv"></i> Anime & TV Series Tracker</h1>
+            <div class="header-actions">
+                <button id="communityBtn"><i class="fas fa-users"></i> Community</button>
+                <button id="analyticsBtn"><i class="fas fa-chart-bar"></i> Analytics</button>
+                <button id="themeBtn"><i class="fas fa-moon"></i></button>
+            </div>
+        </header>
+
+        <nav>
+            <ul class="menu-categories">
+                <li class="active" data-category="all">All</li>
+                <li data-category="watching">Watching</li>
+                <li data-category="completed">Completed</li>
+                <li data-category="on-hold">On Hold</li>
+                <li data-category="dropped">Dropped</li>
+                <li data-category="plan-to-watch">Plan to Watch</li>
+            </ul>
+        </nav>
+
+        <main>
+            <div class="search-filter">
+                <input type="text" id="searchInput" placeholder="Search anime...">
+                <select id="genreFilter">
+                    <option value="">All Genres</option>
+                    <option value="action">Action</option>
+                    <option value="adventure">Adventure</option>
+                    <option value="comedy">Comedy</option>
+                    <option value="drama">Drama</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="sci-fi">Sci-Fi</option>
+                </select>
+                <button id="addAnimeBtn"><i class="fas fa-plus"></i> Add Anime</button>
+            </div>
+
+            <div class="anime-grid" id="animeGrid">
+                <!-- Anime cards will be inserted here by JavaScript -->
+            </div>
+        </main>
+
+        <div class="modal" id="animeModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="modal-body">
+                    <div class="modal-left">
+                        <img id="modalImage" src="" alt="Anime Poster">
+                        <div class="streaming-links" id="streamingLinks">
+                            <h3>Watch on:</h3>
+                            <!-- Streaming links will be added here -->
+                        </div>
+                    </div>
+                    <div class="modal-right">
+                        <h2 id="modalTitle"></h2>
+                        <div class="anime-info">
+                            <span id="modalEpisodes"></span>
+                            <span id="modalGenre"></span>
+                            <span id="modalYear"></span>
+                            <span id="modalRating"></span>
+                        </div>
+                        <div class="spoiler-section">
+                            <label>
+                                <input type="checkbox" id="spoilerToggle"> Show spoilers
+                            </label>
+                            <p id="modalDescription"></p>
+                        </div>
+                        <div class="progress-container">
+                            <label for="progressInput">Progress:</label>
+                            <input type="number" id="progressInput" min="0">
+                            <button id="updateProgress">Update</button>
+                            <div class="reminder-section">
+                                <input type="text" id="reminderDate" placeholder="Set reminder date">
+                                <button id="setReminder">Set Reminder</button>
+                            </div>
+                        </div>
+                        <div class="status-buttons">
+                            <button class="status-btn" data-status="watching">Watching</button>
+                            <button class="status-btn" data-status="completed">Completed</button>
+                            <button class="status-btn" data-status="on-hold">On Hold</button>
+                            <button class="status-btn" data-status="dropped">Dropped</button>
+                            <button class="status-btn" data-status="plan-to-watch">Plan to Watch</button>
+                        </div>
+                        <div class="reviews-section">
+                            <h3>Reviews</h3>
+                            <div class="reviews-container" id="reviewsContainer">
+                                <!-- Reviews will be added here -->
+                            </div>
+                            <textarea id="newReview" placeholder="Write your review..."></textarea>
+                            <button id="submitReview">Submit Review</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="addAnimeModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Add New Anime</h2>
+                <form id="addAnimeForm">
+                    <div class="form-group">
+                        <label for="animeTitle">Title:</label>
+                        <input type="text" id="animeTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="animeImage">Image URL:</label>
+                        <input type="url" id="animeImage" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="animeEpisodes">Total Episodes:</label>
+                        <input type="number" id="animeEpisodes" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="animeGenre">Genre:</label>
+                        <select id="animeGenre" required>
+                            <option value="action">Action</option>
+                            <option value="adventure">Adventure</option>
+                            <option value="comedy">Comedy</option>
+                            <option value="drama">Drama</option>
+                            <option value="fantasy">Fantasy</option>
+                            <option value="sci-fi">Sci-Fi</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="animeYear">Release Year:</label>
+                        <input type="number" id="animeYear" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="animeDescription">Description:</label>
+                        <textarea id="animeDescription" required></textarea>
+                    </div>
+                    <button type="submit">Add Anime</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="js/db.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/community.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Community</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-users"></i> Anime Community</h1>
+            <div class="header-actions">
+                <button id="homeBtn"><i class="fas fa-home"></i> Home</button>
+                <button id="themeBtn"><i class="fas fa-moon"></i></button>
+            </div>
+        </header>
+
+        <main>
+            <div class="community-header">
+                <h2>Anime Clubs</h2>
+                <button id="createClubBtn"><i class="fas fa-plus"></i> Create Club</button>
+            </div>
+
+            <div class="clubs-container" id="clubsContainer">
+                <!-- Clubs will be inserted here by JavaScript -->
+            </div>
+        </main>
+
+        <div class="modal" id="clubModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="modal-body" id="clubModalBody">
+                    <!-- Club content will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="createClubModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Create New Club</h2>
+                <form id="createClubForm">
+                    <div class="form-group">
+                        <label for="clubName">Club Name:</label>
+                        <input type="text" id="clubName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="clubDescription">Description:</label>
+                        <textarea id="clubDescription" required></textarea>
+                    </div>
+                    <button type="submit">Create Club</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/db.js"></script>
+    <script src="js/community.js"></script>
+</body>
+</html>

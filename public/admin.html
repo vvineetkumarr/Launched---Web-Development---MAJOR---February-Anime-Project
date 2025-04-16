@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-cog"></i> Admin Panel</h1>
+            <div class="header-actions">
+                <button id="homeBtn"><i class="fas fa-home"></i> Home</button>
+                <button id="themeBtn"><i class="fas fa-moon"></i></button>
+            </div>
+        </header>
+
+        <div class="admin-container">
+            <div class="admin-sidebar">
+                <ul>
+                    <li class="active" data-tab="users">Users</li>
+                    <li data-tab="anime">Anime</li>
+                    <li data-tab="clubs">Clubs</li>
+                    <li data-tab="reports">Reports</li>
+                </ul>
+            </div>
+
+            <div class="admin-content">
+                <div class="tab-content" id="usersTab">
+                    <h2>User Management</h2>
+                    <table class="user-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- Users will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tab-content" id="animeTab" style="display: none;">
+                    <h2>Anime Management</h2>
+                    <div id="animeManagementContent">
+                        <!-- Anime management content will be inserted here -->
+                    </div>
+                </div>
+
+                <div class="tab-content" id="clubsTab" style="display: none;">
+                    <h2>Club Management</h2>
+                    <div id="clubManagementContent">
+                        <!-- Club management content will be inserted here -->
+                    </div>
+                </div>
+
+                <div class="tab-content" id="reportsTab" style="display: none;">
+                    <h2>Reports</h2>
+                    <div id="reportsContent">
+                        <!-- Reports content will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/db.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-chart-bar"></i> Analytics Dashboard</h1>
+            <div class="header-actions">
+                <button id="homeBtn"><i class="fas fa-home"></i> Home</button>
+                <button id="themeBtn"><i class="fas fa-moon"></i></button>
+            </div>
+        </header>
+
+        <main>
+            <div class="analytics-container">
+                <div class="analytics-card">
+                    <h2>Watch Time Overview</h2>
+                    <div class="chart-container">
+                        <canvas id="watchTimeChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <h2>Anime Distribution</h2>
+                    <div class="chart-container">
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <h2>Genre Preferences</h2>
+                    <div class="chart-container">
+                        <canvas id="genreChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <h2>Recent Activity</h2>
+                    <div class="recent-activity" id="recentActivity">
+                        <!-- Activity items will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/db.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const homeBtn = document.getElementById('homeBtn');
+            const themeBtn = document.getElementById('themeBtn');
+            
+            // Initialize the analytics
+            function init() {
+                renderCharts();
+                renderRecentActivity();
+                setupEventListeners();
+                checkThemePreference();
+            }
+            
+            // Set up event listeners
+            function setupEventListeners() {
+                // Home button
+                homeBtn.addEventListener('click', () => {
+                    window.location.href = 'index.html';
+                });
+                
+                // Theme toggle
+                themeBtn.addEventListener('click', toggleTheme);
+            }
+            
+            // Render charts
+            function renderCharts() {
+                const animeData = db.getAnimeData();
+                
+                // Watch Time Chart
+                const watchTimeCtx = document.getElementById('watchTimeChart').getContext('2d');
+                const watchTimeData = {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Hours Watched',
+                        data: [12, 19, 15, 25, 18, 30],
+                        backgroundColor: 'rgba(106, 90, 205, 0.2)',
+                        borderColor: 'rgba(106, 90, 205, 1)',
+                        borderWidth: 1
+                    }]
+                };
+                
+                new Chart(watchTimeCtx, {
+                    type: 'bar',
+                    data: watchTimeData,
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+                
+                // Status Distribution Chart
+                const statusCtx = document.getElementById('statusChart').getContext('2d');
+                const statusCounts = {
+                    'watching': 0,
+                    'completed': 0,
+                    'on-hold': 0,
+                    'dropped': 0,
+                    'plan-to-watch': 0
+                };
+                
+                animeData.forEach(anime => {
+                    if (anime.status && statusCounts.hasOwnProperty(anime.status)) {
+                        statusCounts[anime.status]++;
+                    }
+                });
+                
+                const statusData = {
+                    labels: Object.keys(statusCounts).map(key => 
+                        key.charAt(0).toUpperCase() + key.slice(1).replace('-', ' ')
+                    ),
+                    datasets: [{
+                        data: Object.values(statusCounts),
+                        backgroundColor: [
+                            'rgba(106, 90, 205, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(75, 192, 192, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(106, 90, 205, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                };
+                
+                new Chart(statusCtx, {
+                    type: 'doughnut',
+                    data: statusData,
+                    options: {
+                        responsive: true
+                    }
+                });
+                
+                // Genre Preferences Chart
+                const genreCtx = document.getElementById('genreChart').getContext('2d');
+                const genreCounts = {};
+                
+                animeData.forEach(anime => {
+                    if (anime.genre) {
+                        genreCounts[anime.genre] = (genreCounts[anime.genre] || 0) + 1;
+                    }
+                });
+                
+                const genreData = {
+                    labels: Object.keys(genreCounts).map(key => 
+                        key.charAt(0).toUpperCase() + key.slice(1)
+                    ),
+                    datasets: [{
+                        label: 'Anime by Genre',
+                        data: Object.values(genreCounts),
+                        backgroundColor: 'rgba(147, 112, 219, 0.2)',
+                        borderColor: 'rgba(147, 112, 219, 1)',
+                        borderWidth: 1
+                    }]
+                };
+                
+                new Chart(genreCtx, {
+                    type: 'polarArea',
+                    data: genreData,
+                    options: {
+                        responsive: true
+                    }
+                });
+            }
+            
+            // Render recent activity
+            function renderRecentActivity() {
+                const activityContainer = document.getElementById('recentActivity');
+                const animeData = db.getAnimeData();
+                
+                // Sort by most recently updated (simple implementation)
+                const recentAnime = [...animeData]
+                    .sort((a, b) => b.id - a.id) // Sort by ID as a proxy for recency
+                    .slice(0, 5);
+                
+                if (recentAnime.length === 0) {
+                    activityContainer.innerHTML = '<p>No recent activity yet.</p>';
+                    return;
+                }
+                
+                activityContainer.innerHTML = recentAnime.map(anime => `
+                    <div class="activity-item">
+                        <img src="${anime.image || ''}" alt="${anime.title || 'Unknown'}">
+                        <div class="activity-info">
+                            <h4>${anime.title || 'Untitled'}</h4>
+                            <p>Status: ${anime.status ? anime.status.replace('-', ' ') : 'Unknown'}</p>
+                            <p>Progress: ${anime.progress || 0}/${anime.episodes || 0}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            // Theme functions
+            function checkThemePreference() {
+                const darkMode = localStorage.getItem('darkMode') === 'true';
+                if (darkMode) {
+                    document.body.classList.add('dark-mode');
+                    themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+            }
+            
+            function toggleTheme() {
+                document.body.classList.toggle('dark-mode');
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                localStorage.setItem('darkMode', isDarkMode);
+                
+                if (isDarkMode) {
+                    themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            }
+            
+            // Initialize the app
+            init();
+        });
+    </script>
+</body>
+</html>

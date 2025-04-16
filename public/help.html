@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-question-circle"></i> Help Center</h1>
+            <div class="header-actions">
+                <button id="homeBtn"><i class="fas fa-home"></i> Home</button>
+                <button id="themeBtn"><i class="fas fa-moon"></i></button>
+            </div>
+        </header>
+
+        <div class="help-container">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I add an anime to my list?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Click the "Add Anime" button in the top right corner of the main page. Fill in the details of the anime you want to add and click "Add Anime".</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I update my progress on an anime?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Click on the anime card to open its details. In the modal that appears, you can update the number of episodes you've watched in the progress field and click "Update".</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I join a club?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Go to the Community page from the navigation. Browse the available clubs and click "View Club" on one you're interested in. Inside the club page, click "Join Club" to become a member.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I set a reminder for an anime?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Open the anime details and in the progress section, select a date using the date picker and click "Set Reminder". You'll receive notifications on the selected date.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I write a review?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Open the anime details and scroll to the reviews section. Type your review in the text area and click "Submit Review".</p>
+                </div>
+            </div>
+            
+            <div class="contact-support">
+                <h3>Still need help?</h3>
+                <p>Contact our support team at <a href="mailto:support@animetracker.com">support@animetracker.com</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/db.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ toggle functionality
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', () => {
+                    const item = question.parentElement;
+                    item.classList.toggle('active');
+                    
+                    // Toggle icon
+                    const icon = question.querySelector('i');
+                    if (item.classList.contains('active')) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    } else {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                });
+            });
+            
+            // Theme toggle
+            const themeBtn = document.getElementById('themeBtn');
+            themeBtn.addEventListener('click', toggleTheme);
+            
+            // Home button
+            document.getElementById('homeBtn').addEventListener('click', () => {
+                window.location.href = 'index.html';
+            });
+            
+            // Check theme preference
+            function checkThemePreference() {
+                const darkMode = localStorage.getItem('darkMode') === 'true';
+                if (darkMode) {
+                    document.body.classList.add('dark-mode');
+                    themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+            }
+            
+            function toggleTheme() {
+                document.body.classList.toggle('dark-mode');
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                localStorage.setItem('darkMode', isDarkMode);
+                
+                if (isDarkMode) {
+                    themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            }
+            
+            checkThemePreference();
+        });
+    </script>
+</body>
+</html>

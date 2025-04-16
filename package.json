@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "express": "^4.21.2",
+    "flatpickr": "^4.6.13",
+    "mongodb": "^6.15.0"
+  },
+  "name": "anime-tracker",
+  "version": "1.0.0",
+  "main": "setup.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

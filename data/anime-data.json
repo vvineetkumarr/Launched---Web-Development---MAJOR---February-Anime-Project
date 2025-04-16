@@ -1,0 +1,90 @@
+[
+    {
+        "id": 1,
+        "title": "Attack on Titan",
+        "image": "https://cdn.myanimelist.net/images/anime/10/47347.jpg",
+        "episodes": 75,
+        "progress": 0,
+        "status": "plan-to-watch",
+        "genre": "action",
+        "year": 2013,
+        "description": "After his hometown is destroyed and his mother is killed, young Eren Jaeger vows to cleanse the earth of the giant humanoid Titans that have brought humanity to the brink of extinction."
+    },
+    {
+        "id": 2,
+        "title": "Death Note",
+        "image": "https://cdn.myanimelist.net/images/anime/9/9453.jpg",
+        "episodes": 37,
+        "progress": 10,
+        "status": "watching",
+        "genre": "drama",
+        "year": 2006,
+        "description": "A high school student discovers a supernatural notebook that allows him to kill anyone by writing the victim's name while picturing their face."
+    },
+    {
+        "id": 3,
+        "title": "Fullmetal Alchemist: Brotherhood",
+        "image": "https://cdn.myanimelist.net/images/anime/1223/96541.jpg",
+        "episodes": 64,
+        "progress": 64,
+        "status": "completed",
+        "genre": "adventure",
+        "year": 2009,
+        "description": "Two brothers search for a Philosopher's Stone after an attempt to revive their deceased mother goes awry and leaves them in damaged physical forms."
+    },
+    {
+        "id": 4,
+        "title": "Demon Slayer",
+        "image": "https://cdn.myanimelist.net/images/anime/1286/99889.jpg",
+        "episodes": 26,
+        "progress": 15,
+        "status": "on-hold",
+        "genre": "action",
+        "year": 2019,
+        "description": "After a demon attack leaves his family slain and his sister cursed, Tanjiro embarks upon a perilous journey to find a cure and avenge his family."
+    },
+    {
+        "id": 5,
+        "title": "Cowboy Bebop",
+        "image": "https://cdn.myanimelist.net/images/anime/4/19644.jpg",
+        "episodes": 26,
+        "progress": 0,
+        "status": "plan-to-watch",
+        "genre": "sci-fi",
+        "year": 1998,
+        "description": "The futuristic misadventures and tragedies of an easygoing bounty hunter and his partners."
+    },
+    {
+        "id": 6,
+        "title": "One Punch Man",
+        "image": "https://cdn.myanimelist.net/images/anime/12/76049.jpg",
+        "episodes": 12,
+        "progress": 12,
+        "status": "completed",
+        "genre": "comedy",
+        "year": 2015,
+        "description": "The story of Saitama, a hero that does it just for fun & can defeat his enemies with a single punch."
+    },
+    {
+        "id": 7,
+        "title": "Steins;Gate",
+        "image": "https://cdn.myanimelist.net/images/anime/5/73199.jpg",
+        "episodes": 24,
+        "progress": 24,
+        "status": "completed",
+        "genre": "sci-fi",
+        "year": 2011,
+        "description": "After discovering time travel, a university student and his lab assistant must unravel a conspiracy to avoid a dystopian future."
+    },
+    {
+        "id": 8,
+        "title": "Hunter x Hunter",
+        "image": "https://cdn.myanimelist.net/images/anime/11/33657.jpg",
+        "episodes": 148,
+        "progress": 50,
+        "status": "dropped",
+        "genre": "adventure",
+        "year": 2011,
+        "description": "Gon Freecss aspires to become a Hunter, an exceptional being capable of greatness. With his friends and potential, he seeks out his father, who left him when he was younger."
+    }
+]
